@@ -1,0 +1,113 @@
+/* Lógico_1: */
+
+CREATE TABLE Produtos (
+    nomeProduto VARCHAR,
+    quantitdadeArmazenada INTEGER,
+    id_produto VARCHAR PRIMARY KEY,
+    preco FLOAT
+);
+
+CREATE TABLE Materiais (
+    nomeMaterial VARCHAR,
+    quantidadeArmazenada INTEGER,
+    preco FLOAT,
+    id_materiais VARCHAR PRIMARY KEY
+);
+
+CREATE TABLE Funcionarios (
+    cpf VARCHAR PRIMARY KEY,
+    nome VARCHAR,
+    funcao VARCHAR,
+    genero VARCHAR
+);
+
+CREATE TABLE Contato (
+    email VARCHAR PRIMARY KEY,
+    telefone VARCHAR
+);
+
+CREATE TABLE Endereco (
+    rua VARCHAR,
+    bairro VARCHAR,
+    cidade VARCHAR,
+    cep VARCHAR,
+    numero INTEGER,
+    estado VARCHAR,
+    id_endereco VARCHAR PRIMARY KEY
+);
+
+CREATE TABLE Funcao (
+    nomeFuncao VARCHAR,
+    tipoFuncao VARCHAR,
+    id_funcao VARCHAR PRIMARY KEY
+);
+
+CREATE TABLE Vendas (
+    quantidadeVendida INTEGER,
+    lucro FLOAT,
+    idVendas VARCHAR PRIMARY KEY,
+    precisaRepor BOOLEAN
+);
+
+CREATE TABLE quantidade_em_estoque_Produtos_Materiais_Vendas (
+    fk_Produtos_id_produto VARCHAR,
+    fk_Materiais_id_materiais VARCHAR,
+    fk_Vendas_idVendas VARCHAR
+);
+
+CREATE TABLE fabricacao_Funcionarios_Funcao_Vendas (
+    fk_Funcionarios_cpf VARCHAR,
+    fk_Funcao_id_funcao VARCHAR,
+    fk_Vendas_idVendas VARCHAR
+);
+
+CREATE TABLE Informacoes (
+    fk_Contato_email VARCHAR,
+    fk_Endereco_id_endereco VARCHAR,
+    fk_Funcionarios_cpf VARCHAR
+);
+ 
+ALTER TABLE quantidade_em_estoque_Produtos_Materiais_Vendas ADD CONSTRAINT FK_quantidade_em_estoque_Produtos_Materiais_Vendas_1
+    FOREIGN KEY (fk_Produtos_id_produto)
+    REFERENCES Produtos (id_produto)
+    ON DELETE NO ACTION;
+ 
+ALTER TABLE quantidade_em_estoque_Produtos_Materiais_Vendas ADD CONSTRAINT FK_quantidade_em_estoque_Produtos_Materiais_Vendas_2
+    FOREIGN KEY (fk_Materiais_id_materiais)
+    REFERENCES Materiais (id_materiais)
+    ON DELETE NO ACTION;
+ 
+ALTER TABLE quantidade_em_estoque_Produtos_Materiais_Vendas ADD CONSTRAINT FK_quantidade_em_estoque_Produtos_Materiais_Vendas_3
+    FOREIGN KEY (fk_Vendas_idVendas)
+    REFERENCES Vendas (idVendas)
+    ON DELETE NO ACTION;
+ 
+ALTER TABLE fabricacao_Funcionarios_Funcao_Vendas ADD CONSTRAINT FK_fabricacao_Funcionarios_Funcao_Vendas_1
+    FOREIGN KEY (fk_Funcionarios_cpf)
+    REFERENCES Funcionarios (cpf)
+    ON DELETE NO ACTION;
+ 
+ALTER TABLE fabricacao_Funcionarios_Funcao_Vendas ADD CONSTRAINT FK_fabricacao_Funcionarios_Funcao_Vendas_2
+    FOREIGN KEY (fk_Funcao_id_funcao)
+    REFERENCES Funcao (id_funcao)
+    ON DELETE NO ACTION;
+ 
+ALTER TABLE fabricacao_Funcionarios_Funcao_Vendas ADD CONSTRAINT FK_fabricacao_Funcionarios_Funcao_Vendas_3
+    FOREIGN KEY (fk_Vendas_idVendas)
+    REFERENCES Vendas (idVendas)
+    ON DELETE NO ACTION;
+ 
+ALTER TABLE Informacoes ADD CONSTRAINT FK_Informacoes_1
+    FOREIGN KEY (fk_Contato_email)
+    REFERENCES Contato (email)
+    ON DELETE NO ACTION;
+ 
+ALTER TABLE Informacoes ADD CONSTRAINT FK_Informacoes_2
+    FOREIGN KEY (fk_Endereco_id_endereco)
+    REFERENCES Endereco (id_endereco)
+    ON DELETE NO ACTION;
+ 
+ALTER TABLE Informacoes ADD CONSTRAINT FK_Informacoes_3
+    FOREIGN KEY (fk_Funcionarios_cpf)
+    REFERENCES Funcionarios (cpf)
+    ON DELETE NO ACTION;
