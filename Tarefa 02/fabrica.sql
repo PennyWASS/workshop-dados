@@ -151,6 +151,14 @@ SELECT MAX(preco) AS 'Material mais caro' FROM Materiais;
 #Exibindo o valor do material mais barato
 SELECT MIN(preco) AS 'Material mais barato' FROM Materiais;
 
+#Comandos adicionais: Não são necessários para o funcionamento do banco de dados
+#ALTER TABLE Contato ADD PRIMARY KEY(id_contato);
+#ALTER TABLE Funcionarios ADD COLUMN idade INTEGER NOT NULL;
+#UPDATE Funcionarios SET idade = 20 WHERE nome = 'Alice';
+#ALTER TABLE Produtos MODIFY id_funcionario CHAR(25);
+#ALTER TABLE Funcionarios DROP COLUMN idade;
+#DELETE FROM Funcionarios WHERE nome = 'João';
+#SELECT id_produto, quantitdadeArmazenada, preco FROM Produtos ORDER BY preco DESC;
 
 
 ALTER TABLE quantidade_em_estoque_Produtos_Materiais_Vendas ADD CONSTRAINT FK_quantidade_em_estoque_Produtos_Materiais_Vendas_1
